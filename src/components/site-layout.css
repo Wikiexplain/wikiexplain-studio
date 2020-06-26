@@ -1,0 +1,19 @@
+/*Come back when$$$$$*/
+div.SidebarContainer-sc-1ai91zn .SidebarHeader-sc-8lk5py button.Button-sc-1ran8ha  {
+	text-indent: 0;
+	line-height: 0; /* Collapse the original line */
+	width: 85px;
+}
+div.SidebarContainer-sc-1ai91zn .SidebarHeader-sc-8lk5py button.Button-sc-1ran8ha svg {
+	display: none;
+}
+
+div.SidebarContainer-sc-1ai91zn .SidebarHeader-sc-8lk5py button.Button-sc-1ran8ha::after {
+	content: "New Article";
+	text-indent: 0;
+}
+
+.ContentMenuWrapper-sc-1drq5rr {
+  display: flex;
+  justify-content: center;
+}

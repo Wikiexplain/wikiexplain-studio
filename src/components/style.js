@@ -469,11 +469,10 @@ export const GlobalStyles = createGlobalStyle`
 export const Wrapper = styled.div`
   position: relative;
   width: 100%;
-  max-width: 896px;
   margin: 0 auto;
   --wrapper-padding-x: 1rem;
   padding: 0 var(--wrapper-padding-x);
-
+  max-width: 896px;
   @media (min-width: ${(props) => props.theme.breakpoints.small}) {
     --wrapper-padding-x: 2rem;
   }

@@ -8,7 +8,6 @@ import {
   DraftBadge,
 } from "../components/style"
 import { EditToggle } from "../components/editToggle"
-import { ListAuthors } from "../components/authors"
 import { Link } from "gatsby"
 import { PageLayout } from "../components/pageLayout"
 import { useLocalRemarkForm, DeleteAction } from "gatsby-tinacms-remark"
@@ -17,10 +16,11 @@ import {
   InlineTextField,
   InlineWysiwyg,
 } from "react-tinacms-inline"
-import { useAuthors } from "../components/useAuthors"
+
+import { navigate } from "gatsby"
+import { isLoggedIn, getUser } from "../utils/auth"
 
 function Post(props) {
-  const authors = useAuthors()
   const page = props.data.markdownRemark
   const formOptions = {
     actions: [DeleteAction],
@@ -29,12 +29,6 @@ function Post(props) {
         label: "Title",
         name: "rawFrontmatter.title",
         component: "text",
-      },
-      {
-        label: "Authors",
-        name: "rawFrontmatter.authors",
-        component: "authors",
-        authors: authors,
       },
       {
         name: "rawFrontmatter.draft",
@@ -66,18 +60,22 @@ function Post(props) {
 
   const [data, form] = useLocalRemarkForm(page, formOptions)
 
+  if (!isLoggedIn()) {
+    debugger
+    // If we’re not logged in, redirect to the home page.
+    navigate(`/app/login`, { replace: true })
+    return null
+  }
+  const user = getUser();
+  const { email } = user;
+  const emails = ['example-article@wikiexplain.com', email]
+  if (!emails.includes(data.frontmatter.email)) return null
   return (
     <InlineForm form={form}>
       <PageLayout page={data}>
         <Paper>
           <Meta>
             <MetaSpan>{data.frontmatter.date}</MetaSpan>
-            {data.frontmatter.authors && data.frontmatter.authors.length > 0 && (
-              <MetaSpan>
-                <em>By</em>&nbsp;
-                <ListAuthors authorIDs={data.frontmatter.authors} />
-              </MetaSpan>
-            )}
             <MetaActions>
               <Link to="/blog">← Back to Blog</Link>
             </MetaActions>
@@ -93,8 +91,6 @@ function Post(props) {
               }}
             />
           </InlineWysiwyg>
-          {data.frontmatter.draft && <DraftBadge>Draft</DraftBadge>}
-          {process.env.NODE_ENV !== "production" && <EditToggle />}
         </Paper>
       </PageLayout>
     </InlineForm>
@@ -118,7 +114,7 @@ export const postQuery = graphql`
         date(formatString: "MMMM DD, YYYY")
         title
         draft
-        authors
+        email
         hero {
           large
           overlay
@@ -135,9 +131,6 @@ export const postQuery = graphql`
       fileRelativePath
       rawFrontmatter
       rawMarkdownBody
-    }
-    settingsJson(fileRelativePath: { eq: "/content/settings/authors.json" }) {
-      ...authors
     }
   }
 `

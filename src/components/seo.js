@@ -47,10 +47,6 @@ export function SEO({ description, lang, meta, title }) {
           content: `summary`,
         },
         {
-          name: `twitter:creator`,
-          content: site.author,
-        },
-        {
           name: `twitter:title`,
           content: title,
         },

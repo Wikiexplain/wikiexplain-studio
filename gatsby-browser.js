@@ -1,8 +1,21 @@
-import { AuthorsField } from "./src/fields/authors"
+import "firebase/auth"
+import "firebase/database"
+import "firebase/firestore"
+import "firebase/functions"
 
 export const onClientEntry = () => {
-  window.tinacms.fields.add({
-    name: "authors",
-    Component: AuthorsField,
-  })
+	showHideCMS()
+}
+
+export const onRouteUpdate = () => {
+	showHideCMS()
+}
+
+function showHideCMS() {
+	if (window.location.pathname && window.location.pathname.includes('/blog/')) {
+		debugger
+		window.tinacms.sidebar.hidden = false
+	} else {
+		window.tinacms.sidebar.hidden = true
+	}
 }

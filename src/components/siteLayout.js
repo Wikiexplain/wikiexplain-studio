@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import styled, { css } from "styled-components"
 import { Header } from "./header"
@@ -6,11 +6,15 @@ import { Footer } from "./footer"
 import { Theme } from "./theme"
 import Helmet from "react-helmet"
 import slugify from "react-slugify"
+import { getUser } from "../utils/auth"
+import './site-layout.css'
 
 import { createRemarkButton } from "gatsby-tinacms-remark"
 import { JsonCreatorPlugin } from "gatsby-tinacms-json"
 import { withPlugin } from "tinacms"
 
+const user = getUser();
+const { email } = user;
 const MasterLayout = ({ children }) => {
   const data = useStaticQuery(graphql`
     query MasterLayoutQuery {
@@ -22,6 +26,11 @@ const MasterLayout = ({ children }) => {
     }
   `)
 
+  useEffect(() => {
+    const plusAddPost = document.getElementsByClassName('ModalOverlay-sc-1pd6lc5')
+    console.log('#### ', plusAddPost)
+  }, [])
+
   return (
     <>
       <Helmet>
@@ -29,7 +38,7 @@ const MasterLayout = ({ children }) => {
       </Helmet>
       <Theme>
         <Site>
-          <Header siteTitle={data.site.title} />
+          <Header siteTitle={data.site.title} createPostButton={CreatePostButton}/>
           {children}
           <Footer />
         </Site>
@@ -38,8 +47,9 @@ const MasterLayout = ({ children }) => {
   )
 }
 
+
 const CreatePostButton = createRemarkButton({
-  label: "New Post",
+  label: "Create",
   filename(form) {
     let slug = slugify(form.title.toLowerCase())
     return `content/posts/${slug}.md`
@@ -53,7 +63,13 @@ const CreatePostButton = createRemarkButton({
           date: new Date(),
           type: "post",
           path: `/blog/${slug}`,
+          email: email,
           draft: true,
+          hero: {
+            image: '../images/placeholder.jpg',
+            large: false,
+            overlay: true,
+          }
         })
       }, 1000)
     })
@@ -84,7 +100,7 @@ const CreatePageButton = new JsonCreatorPlugin({
   },
 })
 
-export default withPlugin(MasterLayout, [CreatePostButton, CreatePageButton])
+export default withPlugin(MasterLayout, [CreatePostButton])
 
 export const Site = styled.div`
   position: relative;
@@ -104,7 +120,6 @@ export const Site = styled.div`
   > * {
     flex: 1 0 auto;
   }
-
   ${props =>
     props.theme.hero.parallax &&
     css`

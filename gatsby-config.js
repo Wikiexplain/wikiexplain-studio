@@ -1,6 +1,8 @@
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
 const theme = require("./content/settings/theme.json")
 const site = require("./content/settings/site.json")
-
 module.exports = {
   plugins: [
     `gatsby-transformer-sharp`,
@@ -11,9 +13,9 @@ module.exports = {
       resolve: "gatsby-plugin-tinacms",
       options: {
         sidebar: {
-          hidden: process.env.NODE_ENV === "production",
+          hidden: true,
           position: "displace",
-          theme: {
+          theme: {  
             color: {
               primary: {
                 light: theme.color.primary,
@@ -48,6 +50,7 @@ module.exports = {
     },
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-postcss`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -110,5 +113,39 @@ module.exports = {
         },
       },
     },
+    {
+      resolve: `gatsby-plugin-create-client-paths`,
+      options: { prefixes: [`/app/*`] }
+    },
+    {  
+      resolve: `@gatsby-contrib/gatsby-plugin-elasticlunr-search`,  
+      options: {  
+        // Fields to index  
+        fields: [`title`, `tags`, `html`],  
+        resolvers: {  
+          MarkdownRemark: {  
+            title: node => node.frontmatter.title,  
+            tags: node => node.frontmatter.tags,  
+            path: node => node.frontmatter.path,  
+            html: node => node.internal.content, 
+          },  
+        },  
+      },  
+    },
+    {
+      resolve: "gatsby-plugin-firebase",
+      options: {
+        credentials: {
+            apiKey: "AIzaSyCvrNcT0d6SnEIXYjx1FHv7omJ1Px0hdc0",
+            authDomain: "codein30-21871.firebaseapp.com",
+            databaseURL: "https://codein30-21871.firebaseio.com",
+            projectId: "codein30-21871",
+            storageBucket: "codein30-21871.appspot.com",
+            messagingSenderId: "964483565554",
+            appId: "1:964483565554:web:60e8a2fe9e6aaaaaf2cd6b",
+            measurementId: "G-WSQ2346Q8E"
+        }
+      }
+    }
   ],
 }

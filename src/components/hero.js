@@ -7,12 +7,6 @@ import BackgroundImage from "gatsby-background-image"
 export const Hero = ({ hero }) => {
   return (
     <HeroWrapper>
-      <HeroBackground>
-        {hero.overlay && <Overlay />}
-        {hero.image && (
-          <HeroImage fluid={hero.image.childImageSharp.fluid}></HeroImage>
-        )}
-      </HeroBackground>
       {(hero.headline || hero.textline || hero.ctas) && (
         <HeroContent large={hero.large}>
           <Wrapper>
@@ -96,7 +90,7 @@ const HeroBackground = styled.div`
 export const Headline = styled.h2`
   font-size: 2.6em;
   line-height: 1.2;
-  color: ${props => props.theme.color.white};
+  color: ${props => props.theme.color.black};
   word-spacing: 1px;
   font-weight: 700;
   text-transform: none;

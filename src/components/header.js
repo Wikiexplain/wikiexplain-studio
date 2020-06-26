@@ -7,7 +7,7 @@ import { Nav } from "./nav"
 import { ThemeContext } from "./theme"
 import { Link } from "gatsby"
 
-export const Header = styled(({ siteTitle, ...styleProps }) => {
+export const Header = styled(({ siteTitle, createPostButton, ...styleProps }) => {
   return (
     <ThemeContext.Consumer>
       {({ toggleDarkMode, isDarkMode, theme }) => (
@@ -19,7 +19,7 @@ export const Header = styled(({ siteTitle, ...styleProps }) => {
                 {siteTitle}
               </SiteLink>
             </SiteTitle>
-            <Nav toggleDarkMode={toggleDarkMode} isDarkMode={isDarkMode} />
+            <Nav toggleDarkMode={toggleDarkMode} isDarkMode={isDarkMode} createPostButton={createPostButton}/>
           </HeaderWrapper>
         </header>
       )}
@@ -29,31 +29,7 @@ export const Header = styled(({ siteTitle, ...styleProps }) => {
   position: absolute;
   z-index: 100;
   width: 100%;
-  height: ${props => props.theme.header.height};
   top: 0;
-  background-color: ${props => props.theme.color.background};
-  color: ${props => props.theme.color.foreground};
-
-  ${props =>
-    props.theme.header.overline &&
-    css`
-      border-top: 6px solid ${props => props.theme.color.primary};
-    `};
-
-  ${props =>
-    props.theme.header.underline &&
-    css`
-      box-shadow: inset 0 -1px 0 ${props => transparentize(0.9, props.theme.color.white)},
-        0 1px 0 ${props => transparentize(0.9, props.theme.color.black)};
-    `};
-
-  ${props =>
-    props.theme.header.transparent &&
-    css`
-      background-color: ${props =>
-        transparentize(0.9, props.theme.color.black)};
-      color: ${props => props.theme.color.white};
-    `};
 `
 
 export const SiteLink = styled(Link)`
@@ -62,7 +38,7 @@ export const SiteLink = styled(Link)`
   display: flex;
   align-items: center;
   align-self: stretch;
-  color: inherit !important;
+  color: #555 !important;
   text-decoration: none;
   margin: 0;
   transition: all 150ms ${p => p.theme.easing};
@@ -108,4 +84,31 @@ export const HeaderWrapper = styled(Wrapper)`
   justify-content: space-between;
   align-items: center;
   height: 100%;
+  max-width: none;
+  background: linear-gradient(90deg,#61c1ff,#ef8181);
+  margin-bottom: 0;
+  box-shadow: 0 .25rem 1.25rem var(--text-color);
+  z-index: 10;
+  --bg1: #fff;
+  --bg2: #fafafa;
+  --bg3: #fcfcfc;
+  --bg4: #f8f8f8;
+  --invert1: #282c35;
+  --invert2: #f9ffee;
+  --text-color: #555;
+  --link: var(--text-color);
+  --post-content-link: #d32f2f;
+  --subtle-top1: #61c1ff;
+  --subtle-top2: #ef8181;
+  --subtle-h1-1: #ef9a9a;
+  --subtle-h1-2: #e53935;
+  --subtle-h1-3: #b71c1c;
+  --header-h2: #008f83;
+  --hover-top: #61c1ff;
+  --hover-top-icon: #df1c31;
+  --post-card-hover: var(--black);
+  --category-border: #757575;
+  --tag-border: #212121;
+  --warning: #e75b7e;
+  --info: #6200ee;
 `

@@ -8,15 +8,15 @@ import {
   MetaActions,
   DraftBadge,
 } from "../components/style"
-import { ListAuthors, AuthorsForm } from "../components/authors"
 import { Link } from "gatsby"
 import { PageLayout } from "../components/pageLayout"
-
 import { useLocalJsonForm } from "gatsby-tinacms-json"
+
+import { navigate } from "gatsby"
+import { isLoggedIn, getUser } from "../utils/auth"
 
 export default function List({ data, pageContext }) {
   const [page] = useLocalJsonForm(data.page, ListForm)
-  const [authors] = useLocalJsonForm(data.authors, AuthorsForm)
 
   const { slug, limit, skip, numPages, currentPage } = pageContext
   const isFirst = currentPage === 1
@@ -26,11 +26,21 @@ export default function List({ data, pageContext }) {
   const nextPage = slug + "/" + (currentPage + 1).toString()
   page.title = isFirst ? page.title : page.title + " - " + currentPage
 
+  if (!isLoggedIn()) {
+    const url = `/app/login?originSlug=${pageContext.slug}`
+    // If we’re not logged in, redirect to the home page.
+    navigate(url, { replace: true })
+    return null
+  }
+  const user = getUser();
+  const { email } = user;
+  const emails = ['example-article@wikiexplain.com', email]
+  const posts = data.posts.edges.filter(f => emails.includes(f.node.frontmatter.email))
   return (
     <PageLayout page={page}>
       <>
-        {data.posts &&
-          data.posts.edges.map(item => {
+        {posts &&
+          posts.map(item => {
             return (
               <Paper article key={item.node.id}>
                 {item.node.frontmatter.draft && <DraftBadge>Draft</DraftBadge>}
@@ -42,12 +52,6 @@ export default function List({ data, pageContext }) {
                 <p>{item.node.excerpt}</p>
                 <Meta>
                   <MetaSpan>{item.node.frontmatter.date}</MetaSpan>
-                  {item.node.frontmatter.authors && (
-                    <MetaSpan>
-                      <em>By</em>&nbsp;
-                      <ListAuthors authorIDs={item.node.frontmatter.authors} />
-                    </MetaSpan>
-                  )}
                   <MetaActions>
                     <Link to={item.node.frontmatter.path}>Read Article →</Link>
                   </MetaActions>
@@ -118,18 +122,10 @@ export const pageQuery = graphql`
             path
             title
             draft
-            authors
+            email
           }
         }
       }
-    }
-    authors: settingsJson(
-      fileRelativePath: { eq: "/content/settings/authors.json" }
-    ) {
-      ...authors
-
-      rawJson
-      fileRelativePath
     }
   }
 `
@@ -146,77 +142,7 @@ export const ListNav = styled.div`
 `
 
 const ListForm = {
-  label: "Page",
+  label: "Let's create!",
   fields: [
-    {
-      label: "Title",
-      name: "rawJson.title",
-      component: "text",
-    },
-    {
-      label: "Hero",
-      name: "rawJson.hero",
-      component: "group",
-      fields: [
-        {
-          label: "Headline",
-          name: "headline",
-          component: "text",
-        },
-        {
-          label: "Textline",
-          name: "textline",
-          component: "text",
-        },
-        {
-          label: "Image",
-          name: "image",
-          component: "image",
-          parse: filename => `../images/${filename}`,
-          uploadDir: () => `/content/images/`,
-          previewSrc: formValues => {
-            if (!formValues.jsonNode.hero || !formValues.jsonNode.hero.image)
-              return ""
-            return formValues.jsonNode.hero.image.childImageSharp.fluid.src
-          },
-        },
-        {
-          label: "Actions",
-          name: "ctas",
-          component: "group-list",
-          itemProps: item => ({
-            key: item.link,
-            label: item.label,
-          }),
-          fields: [
-            {
-              label: "Label",
-              name: "label",
-              component: "text",
-            },
-            {
-              label: "Link",
-              name: "link",
-              component: "text",
-            },
-            {
-              label: "Primary",
-              name: "primary",
-              component: "toggle",
-            },
-            {
-              label: "Arrow",
-              name: "arrow",
-              component: "toggle",
-            },
-          ],
-        },
-        {
-          label: "Large",
-          name: "large",
-          component: "toggle",
-        },
-      ],
-    },
   ],
 }
