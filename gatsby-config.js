@@ -60,7 +60,7 @@ module.exports = {
         background_color: theme.color.primary,
         theme_color: theme.color.primary,
         display: `minimal-ui`,
-        icon: `content/images/icon.png`,
+        icon: `content/images/icon.jpg`,
       },
     },
     `gatsby-plugin-offline`,
@@ -137,14 +137,14 @@ module.exports = {
       resolve: "gatsby-plugin-firebase",
       options: {
         credentials: {
-            apiKey: "AIzaSyCvrNcT0d6SnEIXYjx1FHv7omJ1Px0hdc0",
-            authDomain: "codein30-21871.firebaseapp.com",
-            databaseURL: "https://codein30-21871.firebaseio.com",
-            projectId: "codein30-21871",
-            storageBucket: "codein30-21871.appspot.com",
-            messagingSenderId: "964483565554",
-            appId: "1:964483565554:web:60e8a2fe9e6aaaaaf2cd6b",
-            measurementId: "G-WSQ2346Q8E"
+          apiKey: "AIzaSyB7SZeIH4vEXrW1kmoFlnp3rx55Yo_4pno",
+          authDomain: "wikiexplain-23f7f.firebaseapp.com",
+          databaseURL: "https://wikiexplain-23f7f.firebaseio.com",
+          projectId: "wikiexplain-23f7f",
+          storageBucket: "wikiexplain-23f7f.appspot.com",
+          messagingSenderId: "939355541393",
+          appId: "1:939355541393:web:721b74a1b6cdd357249430",
+          measurementId: "G-K38M195EB6"
         }
       }
     }
