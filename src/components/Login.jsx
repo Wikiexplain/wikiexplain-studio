@@ -8,7 +8,9 @@ import * as queryString from 'query-string'
 
 const Login = (props) => {
   const [data, setData] = React.useState(null)
-  const urlParams = queryString.parse(props.location.search)
+  let urlParams = queryString.parse(props.location.search)
+  if (Object.keys(urlParams).length === 0) urlParams = { "originSlug": '/blog' }
+  debugger
   React.useEffect(() => {
     firebase
       .database()

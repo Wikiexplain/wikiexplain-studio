@@ -124,7 +124,8 @@ module.exports = {
         fields: [`title`, `tags`, `html`],  
         resolvers: {  
           MarkdownRemark: {  
-            title: node => node.frontmatter.title,  
+            title: node => node.frontmatter.title,
+            email: node => node.frontmatter.email, 
             tags: node => node.frontmatter.tags,  
             path: node => node.frontmatter.path,  
             html: node => node.internal.content, 

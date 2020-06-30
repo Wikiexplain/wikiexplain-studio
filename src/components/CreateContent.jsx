@@ -19,8 +19,9 @@ import { useCMS, useSubscribable } from '@tinacms/react-core'
 import { mix, transparentize } from "polished"
 import { Link, navigate } from 'gatsby'
 import { isLoggedIn } from "../utils/auth"
+import {AddCircle } from '@styled-icons/material'
 
-//
+
 export const CreateContentButton = ({ plugin }) => {
   const [open, setOpen] = React.useState(false)
   const click = evt => {
@@ -89,33 +90,50 @@ const FormModal = ({ plugin, close }) => {
     </Modal>
   )
 }
-export const CreateButton = styled(({children, ...styleProps }) => {
+
+export const CreateButton = styled(({ children, ...styleProps }) => {
   return (
     <button {...styleProps}>
+      <i><AddCircle className="add-circle" /></i>
       <span>{children}</span>
     </button>
   )
 })`
+  padding: 0;
   border: 0;
   background: transparent;
   cursor: pointer;
-  margin-left: 1rem;
-  align-self: stretch;
-
-  flex: 1 0 auto;
-  line-height: ${props => props.theme.header.height};
-  padding: 0 0.75rem;
-  display: flex;
-  align-items: center;
-  position: relative;
-  text-align: center;
   text-transform: uppercase;
-  font-size: 0.8rem;
-  letter-spacing: 0.5px;
-  text-decoration: none;
-  color: inherit !important;
-  opacity: 0.5;
-  overflow: visible;
-  transition: all 150ms ${p => p.theme.easing};
-  z-index: 1;
+  color: #555;
+  transition: all 150ms cubic-bezier(0.215,0.610,0.355,1.000);
+  display: flex;
+  flex: 1 1;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 14px;
+  margin-bottom: 0.3rem;
+  i .add-circle {
+    flex: 1 1;
+    padding-top: 0.8rem;
+    padding-bottom: 0.2rem;
+    transition: all 0.25s linear;
+    width: 37px;
+    line-height: 1;
+
+  }
+  @media (max-width: 600px) {
+    span {
+      display: none
+    }
+    i .add-circle {
+      flex: 1 1;
+      padding-top: 0.8rem;
+      padding-bottom: 0.2rem;
+      transition: all 0.25s linear;
+      width: 32px;
+      line-height: 1;
+
+    }    
+  }
+
 `

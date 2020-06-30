@@ -28,7 +28,6 @@ const MasterLayout = ({ children }) => {
 
   useEffect(() => {
     const plusAddPost = document.getElementsByClassName('ModalOverlay-sc-1pd6lc5')
-    console.log('#### ', plusAddPost)
   }, [])
 
   return (
@@ -64,11 +63,13 @@ const CreatePostButton = createRemarkButton({
           type: "post",
           path: `/blog/${slug}`,
           email: email,
+          author: form.author,
+          category: form.category,
           draft: true,
           hero: {
             image: '../images/placeholder.jpg',
             large: false,
-            overlay: true,
+            overlay: false,
           }
         })
       }, 1000)
@@ -79,6 +80,8 @@ const CreatePostButton = createRemarkButton({
   },
   fields: [
     { name: "title", label: "Title", component: "text", required: true },
+    { name: "author", label: "Author", component: "text", required: true },
+    { name: "category", label: "Category", component: "text", placeholder: "social media, algorithms, dance, STEM", required: true }
   ],
 })
 

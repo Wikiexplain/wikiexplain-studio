@@ -6,6 +6,7 @@ import { transparentize } from "polished"
 import { Nav } from "./nav"
 import { ThemeContext } from "./theme"
 import { Link } from "gatsby"
+import Logo from './../../static/images/favicons/logo.png';
 
 export const Header = styled(({ siteTitle, createPostButton, ...styleProps }) => {
   return (
@@ -15,8 +16,7 @@ export const Header = styled(({ siteTitle, createPostButton, ...styleProps }) =>
           <HeaderWrapper>
             <SiteTitle>
               <SiteLink to="/">
-                <Coffee />
-                {siteTitle}
+                <img src={Logo} />
               </SiteLink>
             </SiteTitle>
             <Nav toggleDarkMode={toggleDarkMode} isDarkMode={isDarkMode} createPostButton={createPostButton}/>
@@ -70,12 +70,20 @@ export const SiteLink = styled(Link)`
   }
 `
 
-export const SiteTitle = styled.h1`
+export const SiteTitle = styled.div`
   margin: 0;
-  flex: 0 0 auto;
-  font-size: 1rem;
-  align-self: stretch;
-  display: flex;
+  img {
+    transition: all .75s ease-in;
+    border-radius: 4px;
+    width: 60px;
+    height: 60px;
+  }
+  @media (max-width: 600px) {
+    img {
+      width: 32px;
+      height: 32px;
+    }
+  }
 `
 
 export const HeaderWrapper = styled(Wrapper)`

@@ -31,6 +31,16 @@ function Post(props) {
         component: "text",
       },
       {
+        label: "Author",
+        name: "rawFrontmatter.author",
+        component: "text",
+      },
+      {
+        label: "Category",
+        name: "rawFrontmatter.category",
+        component: "text",
+      },
+      {
         name: "rawFrontmatter.draft",
         component: "toggle",
         label: "Draft",
@@ -41,7 +51,13 @@ function Post(props) {
         component: "date",
       },
       {
-        label: "Hero Image",
+        label: "Tags",
+        component: 'tags',
+        name: "rawFrontmatter.tags",
+        description: "List all the areas mention in your article"
+      },
+      {
+        label: "Cover Image",
         name: "rawFrontmatter.hero.image",
         component: "image",
         parse: (filename) => `../images/${filename}`,
@@ -59,9 +75,7 @@ function Post(props) {
   }
 
   const [data, form] = useLocalRemarkForm(page, formOptions)
-
   if (!isLoggedIn()) {
-    debugger
     // If we’re not logged in, redirect to the home page.
     navigate(`/app/login`, { replace: true })
     return null
@@ -69,7 +83,15 @@ function Post(props) {
   const user = getUser();
   const { email } = user;
   const emails = ['example-article@wikiexplain.com', email]
-  if (!emails.includes(data.frontmatter.email)) return null
+  if (!emails.includes(data.frontmatter.email)) {
+    return null
+  }
+  let editToggle = null
+  if (data.frontmatter.title === 'example-article' && email === "neybapps@gmail.com") {
+    editToggle = <EditToggle />
+  } else {
+    editToggle = <EditToggle />
+  }
   return (
     <InlineForm form={form}>
       <PageLayout page={data}>
@@ -91,6 +113,9 @@ function Post(props) {
               }}
             />
           </InlineWysiwyg>
+
+          {data.frontmatter.draft && <DraftBadge>Draft</DraftBadge>}
+          {editToggle}
         </Paper>
       </PageLayout>
     </InlineForm>

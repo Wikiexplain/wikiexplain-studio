@@ -46,7 +46,6 @@ export const PageLayout = ({ page, children }) => {
   useEffect(() => {
     const addPostButton = document.getElementsByClassName('ContentMenuWrapper-sc-1drq5rr')
     for(let b of addPostButton){
-      debugger
       console.log(b)
     }
   });

@@ -21,6 +21,7 @@
     "gatsby-cli": "^2.8.5",
     "gatsby-image": "^2.2.29",
     "gatsby-plugin-create-client-paths": "^2.3.4",
+    "gatsby-plugin-env-variables": "^1.0.2",
     "gatsby-plugin-favicon": "^3.1.6",
     "gatsby-plugin-firebase": "^0.2.0-beta.4",
     "gatsby-plugin-layout": "^1.1.13",
@@ -67,7 +68,7 @@
     "react-tinacms-editor": "^0.8.0",
     "react-tinacms-inline": "^0.4.6",
     "styled-components": "^5.1.1",
-    "styled-icons": "^10.2.1",
+    "styled-icons": "^10.5.0",
     "tailwindcss": "^1.4.6",
     "tinacms": "^0.21.1"
   },

@@ -6,7 +6,10 @@ import { isLoggedIn } from "../utils/auth"
 const PrivateRoute = ({ component: Component, location, ...rest }) => {
   if (!isLoggedIn() && location.pathname !== `/app/login`) {
     // If we’re not logged in, redirect to the home page.
-    navigate(`/app/login`, { replace: true })
+
+     const url = `/app/login?originSlug=${location.pathname}`
+    // If we’re not logged in, redirect to the home page.
+    navigate(url, { replace: true })
     return null
   }
   return <Component {...rest} />

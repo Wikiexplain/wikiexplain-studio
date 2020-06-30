@@ -1,18 +1,24 @@
 import React from "react"
-import { graphql } from "gatsby"
+import { graphql, navigate } from "gatsby"
 import { Paper } from "../components/style"
 import { Form, FormBlock } from "../blocks/form"
 import { Title, TitleBlock } from "../blocks/title"
 import { Image, ImageBlock } from "../blocks/image"
 import { Content, ContentBlock } from "../blocks/content"
 import { PageLayout } from "../components/pageLayout"
+import { isLoggedIn } from "../utils/auth"
 
 import { useLocalJsonForm } from "gatsby-tinacms-json"
 
 export default function Page({ data }) {
   const [page] = useLocalJsonForm(data.page, PageForm)
   const blocks = page.blocks ? page.blocks : []
-
+  if (isLoggedIn()) {
+    if (data.page.title === "Home") {
+      navigate(`/blog`, { replace: true })
+      return null
+    }
+  }
   return (
     <PageLayout page={page}>
       <Paper>

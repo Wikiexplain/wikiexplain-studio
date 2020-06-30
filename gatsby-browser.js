@@ -13,7 +13,6 @@ export const onRouteUpdate = () => {
 
 function showHideCMS() {
 	if (window.location.pathname && window.location.pathname.includes('/blog/')) {
-		debugger
 		window.tinacms.sidebar.hidden = false
 	} else {
 		window.tinacms.sidebar.hidden = true
