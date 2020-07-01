@@ -31,8 +31,11 @@ export default function List({ data, pageContext }) {
     if (typeof window !== 'undefined') navigate(url, { replace: true })
     return null
   }
+
   const user = getUser();
-  const { email } = user;
+  if (user) {
+    email = user.email;
+  }
   const emails = ['example-article@wikiexplain.com', email]
   const posts = data.posts.edges.filter(f => emails.includes(f.node.frontmatter.email))
   return (

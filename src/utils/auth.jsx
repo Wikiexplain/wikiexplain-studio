@@ -16,7 +16,7 @@ export const setUser = user => {
 
   export const isLoggedIn = () => {
   const user = getUser()
-  return !!user.email
+  if (user) return !!user.email
 }
 
 export const logout = (firebase) => {

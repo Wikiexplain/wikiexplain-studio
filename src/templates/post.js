@@ -83,7 +83,9 @@ function Post(props) {
     return null
   }
   const user = getUser();
-  const { email } = user;
+  if (user) {
+    email = user.email;
+  }
   const emails = ['example-article@wikiexplain.com', email]
   if (!emails.includes(data.frontmatter.email)) {
     return null

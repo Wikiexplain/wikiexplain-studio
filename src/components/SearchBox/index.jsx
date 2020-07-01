@@ -64,7 +64,9 @@ export default class SearchBox extends Component {
 
   searchIndex = query => {
     const user = getUser();
-    const { email } = user;
+    let email
+
+    if (user) email = user.email
     const approvedEmails = ['example-article@wikiexplain.com', email]
     this.index = this.getOrCreateIndex()  
     this.setState({  

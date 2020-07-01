@@ -5,7 +5,12 @@ import { getUser } from "../utils/auth"
 
 const Profile = () => {
   const user = getUser();
-  const { displayName, email, emailVerified } = user;
+  let displayName, email, emailVerified
+  if (user) {
+   displayName = user.displayName
+   email = user.email
+   emailVerified = user.emailVerified
+  }
 
   return (
     <View title="Account">

@@ -13,8 +13,11 @@ import { createRemarkButton } from "gatsby-tinacms-remark"
 import { JsonCreatorPlugin } from "gatsby-tinacms-json"
 import { withPlugin } from "tinacms"
 
+let email
 const user = getUser();
-const { email } = user;
+if (user) {
+  email = user.email;
+}
 const MasterLayout = ({ children }) => {
   const data = useStaticQuery(graphql`
     query MasterLayoutQuery {
