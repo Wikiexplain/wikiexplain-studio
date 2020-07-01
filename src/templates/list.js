@@ -28,7 +28,7 @@ export default function List({ data, pageContext }) {
   if (!isLoggedIn()) {
     const url = `/app/login?originSlug=${pageContext.slug}`
     // If we’re not logged in, redirect to the home page.
-    if (window) navigate(url, { replace: true })
+    if (typeof window !== 'undefined') navigate(url, { replace: true })
     return null
   }
   const user = getUser();

@@ -77,7 +77,9 @@ function Post(props) {
   const [data, form] = useLocalRemarkForm(page, formOptions)
   if (!isLoggedIn()) {
     // If we’re not logged in, redirect to the home page.
-    if (window) navigate(`/app/login`, { replace: true })
+    if (typeof window !== 'undefined') {
+      navigate(`/app/login`, { replace: true })
+    }
     return null
   }
   const user = getUser();

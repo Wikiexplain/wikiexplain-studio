@@ -26,7 +26,9 @@ export const CreateContentButton = ({ plugin }) => {
   const [open, setOpen] = React.useState(false)
   const click = evt => {
    if (!isLoggedIn()) {
-      if(window) navigate(`/app/login`, { replace: true })
+      if (typeof window !== 'undefined') {
+        navigate(`/app/login`, { replace: true })
+      }
       return null
    } else {
       setOpen(true)
