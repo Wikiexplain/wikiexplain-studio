@@ -29,7 +29,8 @@ export default () => {
       <p>
         <NavA
           href="/" 
-          onClick={event => { event.preventDefault(); logout(firebase).then(() => navigate(`/app/login`)) }}
+          onClick={event => { event.preventDefault(); logout(firebase).then(() => {
+            if (window) navigate(`/app/login`); })}}
           >
           log out
         </NavA>

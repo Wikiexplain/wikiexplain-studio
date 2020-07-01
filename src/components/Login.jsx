@@ -22,7 +22,7 @@ const Login = (props) => {
   }, [])
 
   if (isLoggedIn()) {
-    navigate(urlParams.originSlug)
+    if (window) navigate(urlParams.originSlug)
   }
 
   function getUiConfig(auth) {
@@ -36,7 +36,7 @@ const Login = (props) => {
       callbacks: {
         signInSuccessWithAuthResult: (result) => {
           setUser(result.user);
-          navigate(urlParams.originSlug);
+          if (window) navigate(urlParams.originSlug);
         }
       }
     };

@@ -15,7 +15,7 @@ export default function Page({ data }) {
   const blocks = page.blocks ? page.blocks : []
   if (isLoggedIn()) {
     if (data.page.title === "Home") {
-      navigate(`/blog`, { replace: true })
+      if (window) navigate(`/blog`, { replace: true })
       return null
     }
   }
