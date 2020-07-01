@@ -3,7 +3,7 @@ title: example-article
 date: '2020-06-23T06:45:35.085Z'
 type: post
 path: /blog/example-article
-email: neybapps@gmail.com
+email: example-article@wikiexplain.com
 author: Neypapps
 category: social
 draft: true

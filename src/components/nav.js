@@ -19,15 +19,20 @@ export const Nav = ({ toggleDarkMode, isDarkMode, createPostButton }) => {
   `)
   const cms = useCMS()
   const [navOpen, setNavOpen] = useState(false)
-  const toggleNavOpen = () => {
-    const open = !navOpen
-    const toggle = document.getElementsByClassName('nav-toggle-list')[0]
-    if(open) {
-      toggle.setAttribute('open', 1)
+  const toggleNavOpen = (evt) => {
+    evt.stopPropagation()
+    let toggle = document.getElementsByClassName('nav-toggle-list')[0]
+    const accountList = document.querySelector('.account-list')
+    if(navOpen) {
+      toggle.setAttribute('open', "0")
+      accountList.style.pointerEvents = "none"
+      accountList.style.opacity = "0"
     } else {
-      toggle.setAttribute('open', 0)
+      toggle.setAttribute('open', "1")
+      accountList.style.pointerEvents = "all"
+      accountList.style.opacity = "1"
     }
-    setNavOpen(open)
+    setNavOpen(!navOpen)
   }
 
 
@@ -81,7 +86,6 @@ export const Nav = ({ toggleDarkMode, isDarkMode, createPostButton }) => {
           onClick={toggleNavOpen}
           navOpen={navOpen}
           className="nav-toggle-list"
-          open="0"
         ></NavToggle>
         </StyleLi>
       </StyledNavbarRight>
@@ -120,14 +124,14 @@ export const useOutsideAlerter = (ref) => {
          */
         function handleClickOutside(event) {
           event.stopPropagation()
-          if (ref.current && !ref.current.contains(event.target)) {
-            const accounToggle = document.querySelector('.nav-toggle-list')
+          if (ref.current && !ref.current.className.includes('nav-toggle-list') && !ref.current.contains(event.target)) {
+            let accounToggle = document.querySelector('.nav-toggle-list')
             const accountList = document.querySelector('.account-list')
             const open = accounToggle.getAttribute('open')
             if (open === "1") {
-              accountList.style.display = "none"
-            } else {
-              accountList.style.display = "flex"
+              accounToggle.setAttribute('open', "0")
+              accountList.style.pointerEvents = "none"
+              accountList.style.opacity = "0"
             }
           }
 
@@ -155,8 +159,9 @@ export const StyledNavbar = styled(({children, ...styleProps}) => {
   )
 })`
   color: inherit;
-  pointer-events: none;
   background-color: white;
+  opacity: 0;
+  pointer-events: none;
   @media (max-width: ${props => props.theme.breakpoints.huge}) {
     position: absolute;
     bottom: 0;
@@ -165,17 +170,9 @@ export const StyledNavbar = styled(({children, ...styleProps}) => {
     width: 400px;
     flex-direction: column;
     align-items: stretch;
-    opacity: 0;
     z-index: 1000;
     box-shadow: 0 1rem 2rem -0.5rem ${props => transparentize(0.5, props.theme.color.black)};
     transition: all 150ms ${p => p.theme.easing};
-    pointer-events: none;
-    ${props =>
-      props.navOpen &&
-      css`
-        opacity: 1;
-        pointer-events: all;
-      `};
   }
 
   @media (min-width: ${props => props.theme.breakpoints.huge}) {
@@ -185,8 +182,6 @@ export const StyledNavbar = styled(({children, ...styleProps}) => {
     justify-content: flex-end;
     flex: 1 0 auto;
     margin: 0;
-    opacity: 1;
-    pointer-events: all;
   }
 
   @media (max-width: ${props => props.theme.breakpoints.small}) {
@@ -198,17 +193,9 @@ export const StyledNavbar = styled(({children, ...styleProps}) => {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    opacity: 0;
     z-index: 1000;
     box-shadow: 0 1rem 2rem -0.5rem ${props => transparentize(0.5, props.theme.color.black)};
     transition: all 150ms ${p => p.theme.easing};
-    pointer-events: none;
-    ${props =>
-      props.navOpen &&
-      css`
-        opacity: 1;
-        pointer-events: all;
-      `};
   }
 
 `

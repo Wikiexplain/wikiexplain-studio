@@ -1,6 +1,8 @@
 import React from "react"
-import { graphql } from "gatsby"
+import { graphql, navigate } from "gatsby"
 import styled from "styled-components"
+import { useLocalJsonForm } from "gatsby-tinacms-json"
+
 import {
   Paper,
   Meta,
@@ -10,9 +12,6 @@ import {
 } from "../components/style"
 import { Link } from "gatsby"
 import { PageLayout } from "../components/pageLayout"
-import { useLocalJsonForm } from "gatsby-tinacms-json"
-
-import { navigate } from "gatsby"
 import { isLoggedIn, getUser } from "../utils/auth"
 
 export default function List({ data, pageContext }) {
@@ -143,6 +142,5 @@ export const ListNav = styled.div`
 
 const ListForm = {
   label: "Let's create!",
-  fields: [
-  ],
+  fields: [],
 }

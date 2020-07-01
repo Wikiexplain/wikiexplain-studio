@@ -41,7 +41,7 @@ export default () => {
 }
 
 export const NavLink = styled(({ children, ...styleProps }) => (
-  <Link activeClassName="active" {...styleProps} isCurrent>
+  <Link className="active" {...styleProps}>
     <span>{children}</span>
   </Link>
 ))`
@@ -251,7 +251,7 @@ export const NavLink = styled(({ children, ...styleProps }) => (
     `}
 `
 export const NavA = styled(({ children, ...styleProps }) => (
-  <a activeClassName="active" {...styleProps} isCurrent>
+  <a{...styleProps}>
     <span>{children}</span>
   </a>
 ))`
