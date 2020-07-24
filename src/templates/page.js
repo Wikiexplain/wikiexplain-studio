@@ -6,7 +6,7 @@ import { Title, TitleBlock } from "../blocks/title"
 import { Image, ImageBlock } from "../blocks/image"
 import { Content, ContentBlock } from "../blocks/content"
 import { PageLayout } from "../components/pageLayout"
-import { isLoggedIn } from "../utils/auth"
+import { isLoggedIn } from "../utils"
 
 import { useLocalJsonForm } from "gatsby-tinacms-json"
 
@@ -16,7 +16,7 @@ export default function Page({ data }) {
   if (isLoggedIn()) {
     if (data.page.title === "Home") {
       if (typeof window !== 'undefined') {
-        navigate(`/blog`, { replace: true })
+        navigate(`/wiki`, { replace: true })
       }
       return null
     }

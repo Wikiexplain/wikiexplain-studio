@@ -3,7 +3,7 @@ import { Index } from "elasticlunr"
 import { Link } from "gatsby"  
 import styled from "@emotion/styled"
 import { Search, ArrowBack } from '@styled-icons/material'
-import { getUser } from "../../utils/auth"
+import { getUser } from "../../utils"
 
 export default class SearchBox extends Component { 
   state = {  

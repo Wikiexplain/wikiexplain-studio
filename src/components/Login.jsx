@@ -2,14 +2,14 @@ import React from "react"
 import { navigate } from '@reach/router';
 import View from "./View"
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import { setUser, isLoggedIn } from "../utils/auth"
+import { setUser, isLoggedIn } from "../utils"
 import firebase from "gatsby-plugin-firebase"
 import * as queryString from 'query-string'
 
 const Login = (props) => {
   const [data, setData] = React.useState(null)
   let urlParams = queryString.parse(props.location.search)
-  if (Object.keys(urlParams).length === 0) urlParams = { "originSlug": '/blog' }
+  if (Object.keys(urlParams).length === 0) urlParams = { "originSlug": '/wiki' }
   debugger
   React.useEffect(() => {
     firebase

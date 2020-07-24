@@ -3,10 +3,10 @@ title: Deploy Airflow DAGs to Cloud Composer using Cloud Build
 date: '2020-06-04T22:14:53.183Z'
 category: Cloud Build
 type: post
-path: /blog/deploy-airflow-dags-to-composer
-email: neybapps@gmail.com
+path: /wiki/deploy-airflow-dags-to-composer
+email: wikiexplainllc@gmail.com
 author: Wington Brito
-draft: true
+draft: false
 hero:
   image: ../images/cloudbuildboat.jpg
   large: false

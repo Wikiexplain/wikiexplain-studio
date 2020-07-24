@@ -107,8 +107,7 @@ export const PrismTheme = css`
     hyphens: none;
     border-radius: 0 ${(props) => props.theme.radius.small}
       ${(props) => props.theme.radius.small} 0;
-    background-color: ${(props) =>
-      mix(0.975, props.theme.color.background, props.theme.color.foreground)};
+    background-color: white;
   }
 
   code[class*="language-"] {
@@ -472,13 +471,9 @@ export const Wrapper = styled.div`
   margin: 0 auto;
   --wrapper-padding-x: 1rem;
   padding: 0 var(--wrapper-padding-x);
-  max-width: 896px;
+  max-width: 64rem;
   @media (min-width: ${(props) => props.theme.breakpoints.small}) {
     --wrapper-padding-x: 2rem;
-  }
-
-  @media (min-width: ${(props) => props.theme.breakpoints.large}) {
-    max-width: 1024px;
   }
 
   @media (min-width: ${(props) => props.theme.breakpoints.huge}) {
@@ -725,8 +720,7 @@ export const DraftBadge = styled.span`
   text-transform: uppercase;
   font-size: 0.9rem;
   padding: 0.5rem 0.75rem;
-  border-radius: 0 ${(props) => props.theme.radius.small} 0
-    ${(props) => props.theme.radius.small};
+  border-top-right-radius: 16px;
   color: ${(props) => props.theme.color.primaryContrast};
   background: ${(props) => props.theme.color.primary};
   position: absolute;

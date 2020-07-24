@@ -6,9 +6,9 @@ import { Footer } from "./footer"
 import { Theme } from "./theme"
 import Helmet from "react-helmet"
 import slugify from "react-slugify"
-import { getUser } from "../utils/auth"
+import { getUser } from "../utils"
 import './site-layout.css'
-
+import moment from 'moment'
 import { createRemarkButton } from "gatsby-tinacms-remark"
 import { JsonCreatorPlugin } from "gatsby-tinacms-json"
 import { withPlugin } from "tinacms"
@@ -54,7 +54,8 @@ const CreatePostButton = createRemarkButton({
   label: "Create",
   filename(form) {
     let slug = slugify(form.title.toLowerCase())
-    return `content/posts/${slug}.md`
+    let date = moment(form.date, "YYYY-MM-DD");
+    return `content/posts/{date}-${slug}.md`
   },
   frontmatter(form) {
     let slug = slugify(form.title.toLowerCase())
@@ -64,7 +65,7 @@ const CreatePostButton = createRemarkButton({
           title: form.title,
           date: new Date(),
           type: "post",
-          path: `/blog/${slug}`,
+          path: `/wiki/${slug}`,
           email: email,
           author: form.author,
           category: form.category,

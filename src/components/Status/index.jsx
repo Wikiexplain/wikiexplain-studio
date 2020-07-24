@@ -1,6 +1,6 @@
 import React from "react"
 import { Link, navigate } from "@reach/router"
-import { getUser, isLoggedIn, logout } from "../../utils/auth"
+import { getUser, isLoggedIn, logout } from "../../utils"
 import firebase from "gatsby-plugin-firebase"
 import styled, { css } from "styled-components"
 import { mix, transparentize } from "polished"

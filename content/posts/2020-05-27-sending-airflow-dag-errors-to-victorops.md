@@ -1,17 +1,16 @@
 ---
 title: Sending Airflow DAG Errors to VictorOps
-date: 2020-05-26T14:08:39.672Z
+date: '2020-05-26T14:08:39.672Z'
 category: Airflow
 type: post
-path: /blog/sending-airflow-dag-errors-to-victorops
-email: neybapps@gmail.com
+path: /wiki/sending-airflow-dag-errors-to-victorops
+email: wikiexplainllc@gmail.com
 author: Wington Brito
-draft: true
+draft: false
 hero:
   image: ../images/airflow.png
   large: false
   overlay: false
-
 tags:
   - Airflow
   - VictorOps

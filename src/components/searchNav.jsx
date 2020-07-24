@@ -1,7 +1,7 @@
 import React from "react"  
 import { graphql, StaticQuery } from "gatsby"  
 import Search from "./SearchBox"  
-import { isLoggedIn } from "../utils/auth"
+import { isLoggedIn } from "../utils"
 
 export default () => {
   if (!isLoggedIn()) {

@@ -8,6 +8,7 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     `gatsby-tinacms-json`,
+    `gatsby-plugin-sass`,
     `gatsby-transformer-json`,
     {
       resolve: "gatsby-plugin-tinacms",
@@ -138,7 +139,7 @@ module.exports = {
       options: {
         credentials: {
           apiKey: "AIzaSyB7SZeIH4vEXrW1kmoFlnp3rx55Yo_4pno",
-          authDomain: "wikiexplain-23f7f.firebaseapp.com",
+          authDomain: "wikiexplain.com",
           databaseURL: "https://wikiexplain-23f7f.firebaseio.com",
           projectId: "wikiexplain-23f7f",
           storageBucket: "wikiexplain-23f7f.appspot.com",

@@ -1,7 +1,7 @@
 import React from "react"
 import View from "./View"
 import { Button } from '@tinacms/styles'
-import { getUser } from "../utils/auth"
+import { getUser } from "../utils"
 
 const Profile = () => {
   const user = getUser();

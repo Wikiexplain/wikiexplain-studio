@@ -18,7 +18,7 @@ import { useCMS, useSubscribable } from '@tinacms/react-core'
 // Custom imports not from copied code
 import { mix, transparentize } from "polished"
 import { Link, navigate } from 'gatsby'
-import { isLoggedIn } from "../utils/auth"
+import { isLoggedIn } from "../utils"
 import {AddCircle } from '@styled-icons/material'
 
 

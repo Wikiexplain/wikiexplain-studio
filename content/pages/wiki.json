@@ -1,6 +1,6 @@
 {
-  "path": "/blog",
-  "title": "Blog",
+  "path": "/wiki",
+  "title": "Wiki",
   "pageType": "list",
   "listType": "post",
   "hero": {

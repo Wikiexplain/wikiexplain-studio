@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react"
 import { useStaticQuery, graphql } from "gatsby"
-import { AccountCircle, ClickAwayListener } from '@styled-icons/material'
+import { AccountCircle, ClickAwayListener, Menu } from '@styled-icons/material'
 import styled, { css } from "styled-components"
 import { mix, transparentize } from "polished"
 import { Link } from "gatsby"
@@ -524,8 +524,8 @@ export const NavLink = styled(({ children, ...styleProps }) => (
 export const NavToggle = styled(({ menuOpen, ...styleProps }) => {
   return (
     <button {...styleProps}>
-      <i><AccountCircle className="account-circle"/></i>
-      <span>Account</span>
+      <i><Menu className="account-circle"/></i>
+      <span>Menu</span>
     </button>
   )
 })`

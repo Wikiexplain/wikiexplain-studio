@@ -22,7 +22,7 @@
 - Dark mode
 - Parallax hero _(css powered, optional)_
 - Syntax highlighting
-- Blog
+- Wiki
   - Pagination
   - Author(s)
   - Draft mode
@@ -51,7 +51,7 @@ We encourage you to report bugs, request features or submit improvements! We mad
 
 ## :crystal_ball: Wishlist/Roadmap
 
-- Blog categories & tags
+- Wiki categories & tags
 - Additional blocks: map, image, hero, code
 - Theme setup wizard with presets that include images, content & theme settings
 - [Request something](https://github.com/tinacms/tina-starter-grande/issues/new)

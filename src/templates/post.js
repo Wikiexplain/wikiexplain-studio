@@ -6,7 +6,9 @@ import {
   MetaSpan,
   MetaActions,
   DraftBadge,
+  Image
 } from "../components/style"
+import loadable from '@loadable/component';
 import { EditToggle } from "../components/editToggle"
 import { Link } from "gatsby"
 import { PageLayout } from "../components/pageLayout"
@@ -16,11 +18,13 @@ import {
   InlineTextField,
   InlineWysiwyg,
 } from "react-tinacms-inline"
-
+import { useIsMobile } from '../utils';
 import { navigate } from "gatsby"
-import { isLoggedIn, getUser } from "../utils/auth"
+import { isLoggedIn, getUser } from "../utils"
+import './templates.scss'
 
 function Post(props) {
+  const isMobile = useIsMobile();
   const page = props.data.markdownRemark
   const formOptions = {
     actions: [DeleteAction],
@@ -83,6 +87,7 @@ function Post(props) {
     return null
   }
   const user = getUser();
+  let email
   if (user) {
     email = user.email;
   }
@@ -96,20 +101,44 @@ function Post(props) {
   } else {
     editToggle = <EditToggle />
   }
+  const Disqus = loadable(() => import('../components/disqus'));
+  console.log('##### props ', props)
   return (
     <InlineForm form={form}>
       <PageLayout page={data}>
-        <Paper>
+        <Paper className="post-card-text">
           <Meta>
-            <MetaSpan>{data.frontmatter.date}</MetaSpan>
+            {!isMobile && data.frontmatter.category && (
+              <span className="post-category">{data.frontmatter.category}</span>
+            )}
             <MetaActions>
-              <Link to="/blog">← Back to Blog</Link>
+              <Link to="/wiki">← Back to Wiki</Link>
             </MetaActions>
           </Meta>
-          <h1>
+          <h3 className="post-title">
             <InlineTextField name="rawFrontmatter.title" />
-          </h1>
-          <hr />
+          </h3>
+          {isMobile && data.frontmatter.category && (
+            <span className="post-category">{data.frontmatter.category}</span>
+          )}
+          <div className="post-subtitle">
+            <span className="subtitle-caption">
+              <span className="author">{data.frontmatter.author}</span>
+              <span>
+                {` • ${data.frontmatter.date}`}
+              </span>
+            </span>
+          </div>
+          <ul className="post-tags">
+            {data.frontmatter.tags &&
+            data.frontmatter.tags.map(tag => (
+              <li key={tag}>
+                <Link to={`/tags/${tag}`}>{`🔖${tag}`}</Link>
+              </li>
+            ))}
+          </ul>
+          <hr className="break-line"/>
+          {data.frontmatter.hero.image && <Image fluid={data.frontmatter.hero.image.childImageSharp.fluid} />}
           <InlineWysiwyg name="rawMarkdownBody" format="markdown">
             <div
               dangerouslySetInnerHTML={{
@@ -117,10 +146,10 @@ function Post(props) {
               }}
             />
           </InlineWysiwyg>
-
           {data.frontmatter.draft && <DraftBadge>Draft</DraftBadge>}
           {editToggle}
         </Paper>
+        <Disqus slug={data.frontmatter.path} title={data.frontmatter.title} />
       </PageLayout>
     </InlineForm>
   )
@@ -140,17 +169,20 @@ export const postQuery = graphql`
 
       frontmatter {
         path
-        date(formatString: "MMMM DD, YYYY")
+        date(formatString: "YYYY-MM-DD")
         title
         draft
         email
+        category
+        author
+        tags
         hero {
           large
           overlay
           image {
             childImageSharp {
-              fluid(quality: 70, maxWidth: 1920) {
-                ...GatsbyImageSharpFluid_withWebp
+              fluid(maxWidth: 800, maxHeight: 400) {
+                ...GatsbyImageSharpFluid
               }
             }
           }

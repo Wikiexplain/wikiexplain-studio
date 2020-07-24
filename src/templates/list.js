@@ -2,6 +2,8 @@ import React from "react"
 import { graphql, navigate } from "gatsby"
 import styled from "styled-components"
 import { useLocalJsonForm } from "gatsby-tinacms-json"
+import { useIsMobile } from '../utils';
+import './templates.scss'
 
 import {
   Paper,
@@ -9,12 +11,15 @@ import {
   MetaSpan,
   MetaActions,
   DraftBadge,
+  Image,
 } from "../components/style"
 import { Link } from "gatsby"
 import { PageLayout } from "../components/pageLayout"
-import { isLoggedIn, getUser } from "../utils/auth"
+import { isLoggedIn, getUser } from "../utils"
+
 
 export default function List({ data, pageContext }) {
+  const isMobile = useIsMobile();
   const [page] = useLocalJsonForm(data.page, ListForm)
 
   const { slug, limit, skip, numPages, currentPage } = pageContext
@@ -24,6 +29,7 @@ export default function List({ data, pageContext }) {
     currentPage - 1 === 1 ? slug : slug + "/" + (currentPage - 1).toString()
   const nextPage = slug + "/" + (currentPage + 1).toString()
   page.title = isFirst ? page.title : page.title + " - " + currentPage
+ 
 
   if (!isLoggedIn()) {
     const url = `/app/login?originSlug=${pageContext.slug}`
@@ -33,6 +39,8 @@ export default function List({ data, pageContext }) {
   }
 
   const user = getUser();
+
+  let email
   if (user) {
     email = user.email;
   }
@@ -44,21 +52,40 @@ export default function List({ data, pageContext }) {
         {posts &&
           posts.map(item => {
             return (
-              <Paper article key={item.node.id}>
-                {item.node.frontmatter.draft && <DraftBadge>Draft</DraftBadge>}
-                <h2>
-                  <Link to={item.node.frontmatter.path}>
-                    {item.node.frontmatter.title}
-                  </Link>
-                </h2>
-                <p>{item.node.excerpt}</p>
-                <Meta>
-                  <MetaSpan>{item.node.frontmatter.date}</MetaSpan>
-                  <MetaActions>
-                    <Link to={item.node.frontmatter.path}>Read Article →</Link>
-                  </MetaActions>
-                </Meta>
-              </Paper>
+              <article className="post-card">
+                 {item.node.frontmatter.hero.image && <Image fluid={{ ...item.node.frontmatter.hero.image.childImageSharp.fluid }} className="post-card-cover" />}
+                <Paper article key={item.node.id} className="post-card-text">
+                  {!isMobile && item.node.frontmatter.category && (
+                      <span className="post-category">{item.node.frontmatter.category}</span>
+                  )}
+                  {item.node.frontmatter.draft && <DraftBadge className="draft-badge">Draft</DraftBadge>}
+                  <h3 className="post-title">
+                    <Link to={item.node.frontmatter.path}>
+                      {item.node.frontmatter.title}
+                    </Link>
+                  </h3>
+                  {isMobile && item.node.frontmatter.category && (
+                      <span className="post-category">{item.node.frontmatter.category}</span>
+                  )}
+                  <div className="post-subtitle">
+                    <span className="subtitle-caption">
+                      <span className="author">{item.node.frontmatter.author}</span>
+                      <span>
+                        {` • ${item.node.frontmatter.date}`}
+                      </span>
+                    </span>
+                  </div>
+                  {!isMobile && <p className="content-text">{item.node.excerpt}</p> }
+                  <ul className="post-tags">
+                    {item.node.frontmatter.tags &&
+                    item.node.frontmatter.tags.map(tag => (
+                      <li key={tag}>
+                        <Link to={`/tags/${tag}`}>{`🔖${tag}`}</Link>
+                      </li>
+                    ))}
+                  </ul>
+                </Paper>
+              </article>
             )
           })}
         <ListNav>
@@ -120,11 +147,25 @@ export const pageQuery = graphql`
           id
           excerpt
           frontmatter {
-            date(formatString: "MMMM DD, YYYY")
+            date(formatString: "YYYY-MM-DD")
             path
             title
             draft
             email
+            author
+            category
+            tags
+            hero {
+              large
+              overlay
+              image {
+                childImageSharp {
+                  fluid(quality: 70, maxWidth: 1920) {
+                    ...GatsbyImageSharpFluid_withWebp
+                  }
+                }
+              }
+            }
           }
         }
       }
