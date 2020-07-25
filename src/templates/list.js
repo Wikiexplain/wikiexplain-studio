@@ -76,14 +76,14 @@ export default function List({ data, pageContext }) {
                     </span>
                   </div>
                   {!isMobile && <p className="content-text">{item.node.excerpt}</p> }
-                  <ul className="post-tags">
+                  {!isMobile && <ul className="post-tags">
                     {item.node.frontmatter.tags &&
                     item.node.frontmatter.tags.map(tag => (
                       <li key={tag}>
                         <Link to={`/tags/${tag}`}>{`🔖${tag}`}</Link>
                       </li>
                     ))}
-                  </ul>
+                  </ul>}
                 </Paper>
               </article>
             )
