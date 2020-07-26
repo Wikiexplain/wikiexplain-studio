@@ -1,6 +1,11 @@
 {
   "title": "Contact",
   "path": "/contact",
+  "hero": {
+    "image": "../images/coffee-beans.jpg",
+    "large": false,
+    "overlay": false
+  },
   "blocks": [
     {
       "_template": "TitleBlock",
