@@ -138,14 +138,14 @@ module.exports = {
       resolve: "gatsby-plugin-firebase",
       options: {
         credentials: {
-          apiKey: "AIzaSyB7SZeIH4vEXrW1kmoFlnp3rx55Yo_4pno",
-          authDomain: "wikiexplain.com",
-          databaseURL: "https://wikiexplain-23f7f.firebaseio.com",
-          projectId: "wikiexplain-23f7f",
-          storageBucket: "wikiexplain-23f7f.appspot.com",
-          messagingSenderId: "939355541393",
-          appId: "1:939355541393:web:721b74a1b6cdd357249430",
-          measurementId: "G-K38M195EB6"
+          apiKey: "AIzaSyBnahAiRVCVBCYkL078Q5wPhb-T95Ytrv4",
+          authDomain: "wikiexplain-studio-bc629.firebaseapp.com",
+          databaseURL: "https://wikiexplain-studio-bc629.firebaseio.com",
+          projectId: "wikiexplain-studio-bc629",
+          storageBucket: "wikiexplain-studio-bc629.appspot.com",
+          messagingSenderId: "634340298274",
+          appId: "1:634340298274:web:4f7150f596057102c9447b",
+          measurementId: "G-YRG5759374"
         }
       }
     }
