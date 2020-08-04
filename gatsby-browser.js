@@ -12,7 +12,7 @@ export const onRouteUpdate = () => {
 }
 
 function showHideCMS() {
-	if (window.location.pathname && window.location.pathname.includes('/wiki/')) {
+	if (window.location.pathname && (window.location.pathname.search(/\/wiki\/.+/) >= 0)) {
 		window.tinacms.sidebar.hidden = false
 	} else {
 		window.tinacms.sidebar.hidden = true
