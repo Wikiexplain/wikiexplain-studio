@@ -1,2 +1,10 @@
-# Redirect users with Spanish language preference to es.wikiexplain.com
-/ https://es.estudio.wikiexplain.com  302  Language=es
+[build]
+  publish = "public"
+  command = "npm run build"
+
+[[redirects]]
+  from = "/"
+  to = "https://es.estudio.wikiexplain.com"
+  status = 302
+  force = false
+  conditions = {Language = "es"}
