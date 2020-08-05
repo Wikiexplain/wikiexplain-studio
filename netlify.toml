@@ -3,8 +3,43 @@
   command = "npm run build"
 
 [[redirects]]
-  from = "/"
+  from = "https://www.studio.wikiexplain.com"
   to = "https://es.estudio.wikiexplain.com"
-  status = 302
-  force = false
-  conditions = {Language = "es"}
+  status = 301
+  force = true
+  conditions = {Language = ["es"]}
+
+[[redirects]]
+  from = "http://www.studio.wikiexplain.com"
+  to = "https://es.estudio.wikiexplain.com"
+  status = 301
+  force = true
+  conditions = {Language = ["es"]}
+
+[[redirects]]
+  from = "https://studio.wikiexplain.com/"
+  to = "https://es.estudio.wikiexplain.com"
+  status = 301
+  force = true
+  conditions = {Language = ["es"]}
+
+[[redirects]]
+  from = "http://studio.wikiexplain.com"
+  to = "https://es.estudio.wikiexplain.com"
+  status = 301
+  force = true
+  conditions = {Language = ["es"]}
+
+[[redirects]]
+  from = "studio.wikiexplain.com"
+  to = "https://es.estudio.wikiexplain.com"
+  status = 301
+  force = true
+  conditions = {Language = ["es"]}
+
+[[redirects]]
+  from = "www.studio.wikiexplain.com"
+  to = "https://es.estudio.wikiexplain.com"
+  status = 301
+  force = true
+  conditions = {Language = ["es
