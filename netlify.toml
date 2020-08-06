@@ -3,28 +3,7 @@
   command = "npm run build"
 
 [[redirects]]
-  from = "https://www.studio.wikiexplain.com"
-  to = "https://es.estudio.wikiexplain.com"
-  status = 301
-  force = true
-  conditions = {Language = ["es"]}
-
-[[redirects]]
-  from = "http://www.studio.wikiexplain.com"
-  to = "https://es.estudio.wikiexplain.com"
-  status = 301
-  force = true
-  conditions = {Language = ["es"]}
-
-[[redirects]]
-  from = "https://studio.wikiexplain.com/"
-  to = "https://es.estudio.wikiexplain.com"
-  status = 301
-  force = true
-  conditions = {Language = ["es"]}
-
-[[redirects]]
-  from = "http://studio.wikiexplain.com"
+  from = "https://studio.wikiexplain.com"
   to = "https://es.estudio.wikiexplain.com"
   status = 301
   force = true
@@ -38,8 +17,31 @@
   conditions = {Language = ["es"]}
 
 [[redirects]]
-  from = "www.studio.wikiexplain.com"
+  from = "http://studio.wikiexplain.com"
   to = "https://es.estudio.wikiexplain.com"
   status = 301
   force = true
-  conditions = {Language = ["es
+  conditions = {Language = ["es"]}
+
+[[redirects]]
+  from = "https://www.studio.wikiexplain.com"
+  to = "https://es.estudio.wikiexplain.com"
+  status = 301
+  force = true
+  conditions = {Language = ["es"]}
+
+[[redirects]]
+  from = "http://www.studio.wikiexplain.com"
+  to = "https://es.estudio.wikiexplain.com"
+  status = 301
+  force = true
+  conditions = {Language = ["es"]}
+
+
+[[redirects]]
+  from = "www.studio.wikiexplain.com"
+  to = "es.estudio.wikiexplain.com"
+  status = 301
+  force = true
+  conditions = {Language = ["es"]}
+
