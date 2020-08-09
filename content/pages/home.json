@@ -11,7 +11,7 @@
     "textline": "Take advantage of what you are learning at school, work, or home!",
     "ctas": [
       {
-        "label": "Join the Wikiexplain Studio",
+        "label": "Join Wikiexplain Studio",
         "link": "/wiki",
         "primary": true,
         "arrow": true
