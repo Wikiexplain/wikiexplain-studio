@@ -66,7 +66,7 @@ const CreatePostButton = createRemarkButton({
           title: form.title,
           date: new Date(),
           type: "post",
-          path: `/wiki/${date}${slug}`,
+          path: `/wiki/${date}-${slug}`,
           email: email,
           author: form.author,
           category: form.category,

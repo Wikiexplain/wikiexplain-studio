@@ -5,22 +5,7 @@ import ThemeContext from '../../context';
 import config from '../../../config/siteConfig';
 
 class DisqusIndex extends React.Component {
-  static contextType = ThemeContext
-  state = {
-    render: true,
-  };
-  shouldComponentUpdate() {
-    if (this.state.render) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-  componentDidUpdate() {
-    this.setState({render: false});
-  }
   render() {
-    const themeContext = this.context;
     const { slug, title } = this.props;
     const { disqusShortname } = config;
     const disqusConfig = {
@@ -29,7 +14,7 @@ class DisqusIndex extends React.Component {
       title,
     };
     return (
-      <Disqus.DiscussionEmbed theme={themeContext.theme} shortname={disqusShortname} config={disqusConfig} />
+      <Disqus.DiscussionEmbed theme={""} shortname={disqusShortname} config={disqusConfig} />
     );
   }
 }

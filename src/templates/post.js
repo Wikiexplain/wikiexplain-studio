@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { graphql } from "gatsby"
 import {
   Paper,
@@ -79,6 +79,10 @@ function Post(props) {
   }
 
   const [data, form] = useLocalRemarkForm(page, formOptions)
+  let [renderDisqus, updateDisqus] = useState(true)
+  const refreshDisqus = (flag) => {
+    updateDisqus(flag)
+  }
   if (!isLoggedIn()) {
     // If we’re not logged in, redirect to the home page.
     if (typeof window !== 'undefined') {
@@ -97,12 +101,11 @@ function Post(props) {
   }
   let editToggle = null
   if (data.frontmatter.title === 'example-article' && email === "neybapps@gmail.com") {
-    editToggle = <EditToggle />
+    editToggle = <EditToggle refreshDisqus={refreshDisqus}/>
   } else {
-    editToggle = <EditToggle />
+    editToggle = <EditToggle refreshDisqus={refreshDisqus}/>
   }
   const Disqus = loadable(() => import('../components/disqus'));
-  console.log('##### props ', props)
   return (
     <InlineForm form={form}>
       <PageLayout page={data}>
@@ -149,7 +152,7 @@ function Post(props) {
           {data.frontmatter.draft && <DraftBadge>Draft</DraftBadge>}
           {editToggle}
         </Paper>
-        <Disqus slug={data.frontmatter.path} title={data.frontmatter.title} />
+        {renderDisqus && <Disqus slug={data.frontmatter.path} title={data.frontmatter.title} /> }
       </PageLayout>
     </InlineForm>
   )

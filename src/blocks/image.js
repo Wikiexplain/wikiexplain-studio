@@ -21,7 +21,7 @@ const ImageWrapper = styled.div`
 export const ImageBlock = {
   label: "Image",
   name: "image",
-  key: "test",
+  key: "image-block",
   defaultItem: {
     image: "",
   },
