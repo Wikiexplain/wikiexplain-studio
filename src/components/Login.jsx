@@ -10,7 +10,6 @@ const Login = (props) => {
   const [data, setData] = React.useState(null)
   let urlParams = queryString.parse(props.location.search)
   if (Object.keys(urlParams).length === 0) urlParams = { "originSlug": '/wiki' }
-  debugger
   React.useEffect(() => {
     firebase
       .database()

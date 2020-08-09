@@ -8,7 +8,6 @@ export function Form({ form }) {
   return (
     <StyledForm
       name="contact"
-      action={`https://formspree.io/${form.recipient}`}
       method="POST"
     >
       {form.fields.map(field => {
@@ -131,7 +130,7 @@ export const FormBlock = {
     {
       name: "recipient",
       label: "Recipient",
-      description: "Form is sent via formspree.io.",
+      description: "Form submit to WikiExplain",
       component: "text",
     },
     {

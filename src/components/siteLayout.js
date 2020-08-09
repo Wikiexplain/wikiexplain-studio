@@ -54,18 +54,19 @@ const CreatePostButton = createRemarkButton({
   label: "Create",
   filename(form) {
     let slug = slugify(form.title.toLowerCase())
-    let date = moment(form.date, "YYYY-MM-DD");
-    return `content/posts/{date}-${slug}.md`
+    let date = moment().format("YYYY-MM-DD");
+    return `content/posts/${date}-${slug}.md`
   },
   frontmatter(form) {
     let slug = slugify(form.title.toLowerCase())
+    let date = moment().format("YYYY-MM-DD")
     return new Promise(resolve => {
       setTimeout(() => {
         resolve({
           title: form.title,
           date: new Date(),
           type: "post",
-          path: `/wiki/${slug}`,
+          path: `/wiki/${date}${slug}`,
           email: email,
           author: form.author,
           category: form.category,

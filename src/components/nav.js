@@ -19,20 +19,19 @@ export const Nav = ({ toggleDarkMode, isDarkMode, createPostButton }) => {
   `)
   const cms = useCMS()
   const [navOpen, setNavOpen] = useState(false)
-  const toggleNavOpen = (evt) => {
-    evt.stopPropagation()
-    let toggle = document.getElementsByClassName('nav-toggle-list')[0]
+  const toggleNavOpen  = (trigger = false) => {
     const accountList = document.querySelector('.account-list')
-    if(navOpen) {
-      toggle.setAttribute('open', "0")
+    let accounToggle = document.querySelector('.nav-toggle-list')
+    const openState = accounToggle.getAttribute('open')
+    if(openState == "1") {
+      accounToggle.setAttribute('open', "0");
       accountList.style.pointerEvents = "none"
       accountList.style.opacity = "0"
-    } else {
-      toggle.setAttribute('open', "1")
+    } else if (trigger) {
+      accounToggle.setAttribute('open', "1");
       accountList.style.pointerEvents = "all"
       accountList.style.opacity = "1"
     }
-    setNavOpen(!navOpen)
   }
 
 
@@ -50,44 +49,50 @@ export const Nav = ({ toggleDarkMode, isDarkMode, createPostButton }) => {
         <StyleLi>
           <CreateContentButton plugin={createPostButton}/>
         </StyleLi>
-        <StyledNavbar navOpen={navOpen}
-          className="account-list"
-        >
-            <NavItem key={`account`}>
-              <NavLink
-                to={`/app/profile`}
-              >
-                Account
-              </NavLink>
-            </NavItem>
-            <NavItem key={`about`}>
-              <NavLink
-                to={`/about`}
-              >
-                About
-              </NavLink>
-            </NavItem>
-            <NavItem key={`contact`}>
-              <NavLink
-                to={`/contact`}
-              >
-                Contact
-              </NavLink>
-            </NavItem>
-            <NavItem key={`status`}>
-              <NonNavLink>
-                <Status />
-              </NonNavLink>
-            </NavItem>
-        </StyledNavbar>
-        <StyleLi>
-        <NavToggle
-          aria-label="Toggle Nav"
-          onClick={toggleNavOpen}
-          navOpen={navOpen}
-          className="nav-toggle-list"
-        ></NavToggle>
-        </StyleLi>
+        <NavMenu
+          className="nav-menu"
+          toggleNavOpen={toggleNavOpen}
+          >
+          <StyledNavbar 
+            navOpen={navOpen}
+            className="account-list"
+          >
+              <NavItem key={`account`} className="nav-item" onClick={(evt) => {evt.stopPropagation(); toggleNavOpen()}}>
+                <NavLink
+                  to={`/app/profile`}
+                >
+                  Account
+                </NavLink>
+              </NavItem>
+              <NavItem key={`about`} className="nav-item" onClick={(evt) => {evt.stopPropagation(); toggleNavOpen()}}>
+                <NavLink
+                  to={`/about`}
+                >
+                  About
+                </NavLink>
+              </NavItem>
+              <NavItem key={`contact`} className="nav-item" onClick={(evt) => {evt.stopPropagation(); toggleNavOpen()}}>
+                <NavLink
+                  to={`/contact`}
+                >
+                  Contact
+                </NavLink>
+              </NavItem>
+              <NavItem key={`status`} className="nav-item" onClick={(evt) => {evt.stopPropagation(); toggleNavOpen()}}>
+                <NonNavLink>
+                  <Status />
+                </NonNavLink>
+              </NavItem>
+          </StyledNavbar>
+          <StyleLi className="nav-toggle-list-parent">
+            <NavToggle
+              aria-label="Toggle Nav"
+              onClick={(evt) => {evt.stopPropagation(); toggleNavOpen(true)}}
+              navOpen={navOpen}
+              className="nav-toggle-list"
+            ></NavToggle>
+          </StyleLi>
+        </NavMenu>
       </StyledNavbarRight>
     </>
   )
@@ -117,24 +122,15 @@ export const StyleLi = styled.li`
   flex-basis: 200px;
   transition: all 0.75s ease-out;
 `
-export const useOutsideAlerter = (ref) => {
+export const useOutsideAlerter = (ref, props) => {
     useEffect(() => {
         /**
          * Alert if clicked on outside of element
          */
         function handleClickOutside(event) {
-          event.stopPropagation()
-          if (ref.current && !ref.current.className.includes('nav-toggle-list') && !ref.current.contains(event.target)) {
-            let accounToggle = document.querySelector('.nav-toggle-list')
-            const accountList = document.querySelector('.account-list')
-            const open = accounToggle.getAttribute('open')
-            if (open === "1") {
-              accounToggle.setAttribute('open', "0")
-              accountList.style.pointerEvents = "none"
-              accountList.style.opacity = "0"
+            if (ref.current && !ref.current.contains(event.target)) {
+                props.toggleNavOpen()
             }
-          }
-
         }
 
         // Bind the event listener
@@ -146,12 +142,23 @@ export const useOutsideAlerter = (ref) => {
     }, [ref]);
 }
 
-export const StyledNavbar = styled(({children, ...styleProps}) => {
+export const NavMenu = styled(({children, ...styleProps}) => {
   const wrapperRef = useRef(null);
-  useOutsideAlerter(wrapperRef);
+  useOutsideAlerter(wrapperRef, styleProps);
+  return (
+    <div
+      ref={wrapperRef}
+      {...styleProps}
+    >
+      {children}
+    </div>
+  )
+})`
+  color: inherit;
+`
+export const StyledNavbar = styled(({children, ...styleProps}) => {
   return (
     <ul
-      ref={wrapperRef}
       {...styleProps}
     >
       {children}
@@ -170,7 +177,6 @@ export const StyledNavbar = styled(({children, ...styleProps}) => {
     width: 400px;
     flex-direction: column;
     align-items: stretch;
-    z-index: 1000;
     box-shadow: 0 1rem 2rem -0.5rem ${props => transparentize(0.5, props.theme.color.black)};
     transition: all 150ms ${p => p.theme.easing};
   }
@@ -193,7 +199,6 @@ export const StyledNavbar = styled(({children, ...styleProps}) => {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    z-index: 1000;
     box-shadow: 0 1rem 2rem -0.5rem ${props => transparentize(0.5, props.theme.color.black)};
     transition: all 150ms ${p => p.theme.easing};
   }
@@ -377,7 +382,7 @@ export const NavLink = styled(({ children, ...styleProps }) => (
   color: inherit !important;
   overflow: visible;
   transition: all 150ms ${p => p.theme.easing};
-  z-index: 1;
+  z-index: 10;
   opacity: 2;
 
   button {
@@ -541,6 +546,7 @@ export const NavToggle = styled(({ menuOpen, ...styleProps }) => {
   flex-direction: column;
   align-items: center;
   margin-bottom: 0.3rem;
+  z-index: 2;
   i .account-circle {
     flex: 1 1;
     padding-top: 0.8rem;

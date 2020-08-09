@@ -1,21 +1,16 @@
 {
-  "title": "About",
   "path": "/about",
-  "hero": {
-    "image": "../images/coffee-beans.jpg",
-    "large": false,
-    "overlay": false
-  },
   "blocks": [
     {
-      "_template": "TitleBlock",
-      "title": "Who are we",
-      "underline": true,
-      "content": "Our team is composed of engineers from different fields, graphic designers, and marketing representatives.\nOur mission is to demystify complex topics with relevant insights that would help anyone understand it thoroughly. We welcome anyone from different expertise and skill sets. Join our community and write about your favorite topic!"
-    },
-    {
+      "_template": "ContentBlock",
       "content": "Our team is composed of engineers from different fields, graphic designers, and marketing representatives.\nOur mission is to demystify complex topics with relevant insights that would help anyone understand it thoroughly. We welcome anyone from different expertise and skill sets. Join our community and write about your favorite topic!"
     }
   ],
-  "displayTitle": true
+  "hero": {
+    "headline": "Who we are",
+    "image": "../images/placeholder.jpg",
+    "large": false
+  },
+  "displayTitle": false,
+  "title": "About"
 }

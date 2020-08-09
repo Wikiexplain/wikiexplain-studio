@@ -3,22 +3,22 @@
   "blocks": [
     {
       "_template": "ContentBlock",
-      "content": "# Demystify any topic!\n\nExplain things like:\n\n How to create a Facebook or TikTok account\n\nA summary of a book you are reading\n\nAn exam you are studying for.\n\nLearning a computer programming language or algorithm\n\nHow to become an Uber driver\n\nJust talk about anything you want\n\nThe sky's the limit!!"
+      "content": "# Demystify any topic!\n\nExplain things like:\n\n - How to create a Facebook account or TikTok account\n\n - Reaction to a music video or song \n\n - How the electoral process works \n\n - Talk about a YouTube trending video \n\n - A summary of a book you are reading\n\n  - Explain song lyrics \n\n  - Talk about how the NBA Bubble works\n\n - An exam you are studying for\n\n - How to prepare a meal \n\n - Learning a computer programming language or algorithm\n\n - How to become an Uber driver\n\n Just talk about anything you want\n\nThe sky's the limit!!"
     }
   ],
   "hero": {
-    "headline": "Explain and Get Rewarded",
+    "headline": "Explain and Get Money!",
     "textline": "Take advantage of what you are learning at school, work, or home!",
     "ctas": [
       {
         "label": "Join the Wikiexplain Studio",
-        "link": "/blog",
+        "link": "/wiki",
         "primary": true,
         "arrow": true
       }
     ],
     "image": "../images/placeholder.jpg",
-    "large": true
+    "large": false
   },
   "displayTitle": false,
   "title": "Home"
