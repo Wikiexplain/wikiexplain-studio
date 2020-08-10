@@ -136,7 +136,7 @@ function Post(props) {
             {data.frontmatter.tags &&
             data.frontmatter.tags.map(tag => (
               <li key={tag}>
-                <Link to={`/tags/${tag}`}>{`🔖${tag}`}</Link>
+                <Link to={data.frontmatter.path}>{`🔖${tag}`}</Link>
               </li>
             ))}
           </ul>

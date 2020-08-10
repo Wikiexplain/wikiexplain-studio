@@ -54,7 +54,6 @@ export const Nav = ({ toggleDarkMode, isDarkMode, createPostButton }) => {
           toggleNavOpen={toggleNavOpen}
           >
           <StyledNavbar 
-            navOpen={navOpen}
             className="account-list"
           >
               <NavItem key={`account`} className="nav-item" onClick={(evt) => {evt.stopPropagation(); toggleNavOpen()}}>
@@ -88,7 +87,6 @@ export const Nav = ({ toggleDarkMode, isDarkMode, createPostButton }) => {
             <NavToggle
               aria-label="Toggle Nav"
               onClick={(evt) => {evt.stopPropagation(); toggleNavOpen(true)}}
-              navOpen={navOpen}
               className="nav-toggle-list"
             ></NavToggle>
           </StyleLi>

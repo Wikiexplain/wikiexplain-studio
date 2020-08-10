@@ -50,9 +50,9 @@ export default function List({ data, pageContext }) {
     <PageLayout page={page}>
       <>
         {posts &&
-          posts.map(item => {
+          posts.map((item, i) => {
             return (
-              <article className="post-card">
+              <article className="post-card" key={i}>
                  {item.node.frontmatter.hero.image && <Image fluid={{ ...item.node.frontmatter.hero.image.childImageSharp.fluid }} className="post-card-cover" />}
                 <Paper article key={item.node.id} className="post-card-text">
                   {!isMobile && item.node.frontmatter.category && (
@@ -80,7 +80,7 @@ export default function List({ data, pageContext }) {
                     {item.node.frontmatter.tags &&
                     item.node.frontmatter.tags.map(tag => (
                       <li key={tag}>
-                        <Link to={`/tags/${tag}`}>{`🔖${tag}`}</Link>
+                        <Link to={item.node.frontmatter.path}>{`🔖${tag}`}</Link>
                       </li>
                     ))}
                   </ul>}
