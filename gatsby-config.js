@@ -3,6 +3,8 @@ require("dotenv").config({
 })
 const theme = require("./content/settings/theme.json")
 const site = require("./content/settings/site.json")
+const path = require("path")
+const REPO_ABSOLUTE_PATH = path.join(process.cwd(), "../..")
 module.exports = {
   plugins: [
     `gatsby-transformer-sharp`,
@@ -26,7 +28,18 @@ module.exports = {
             },
           },
         },
-        plugins: ["gatsby-tinacms-git", "gatsby-tinacms-remark"],
+        plugins: [
+          {
+          resolve: "gatsby-tinacms-git",
+            options: {
+              pathToRepo: REPO_ABSOLUTE_PATH,
+              pathToContent: 'content/posts',
+              gitRemote: 'git@gitlab.com:neybapps/wikiexplain-studio.git',
+              sshKey: process.env.SSH_KEY,
+            },
+          },
+          "gatsby-tinacms-remark"
+        ],
       },
     },
     {
