@@ -8,7 +8,6 @@ pages:
   script:
     - yarn
     - yarn build --prefix-paths
-    - yarn build-storybook
   artifacts:
     paths:
       - public
