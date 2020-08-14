@@ -3,7 +3,7 @@ image: node:14.3.0
 pages:
   script:
   - npm install
-  - npm run build -- --prefix-paths
+  - npm run dev -- --prefix-paths
   artifacts:
     paths:
     - public
