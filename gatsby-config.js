@@ -31,10 +31,10 @@ module.exports = {
             resolve: "gatsby-tinacms-git",
             options: {
               gitRemote:
-                "git@gitlab.com:neybapps/wikiexplain-studio-cloud.git",
+                "git@github.com:Wikiexplain/wikiexplain-studio.git",
               defaultCommitMessage: "Edited with Cloud Editor",
-              defaultCommitName: "CE Post",
-              defaultCommitEmail: "neybapps@gmail.com",
+              defaultCommitName: "Cloud Edit Post",
+              defaultCommitEmail: "wikiexplainllc@gmail.com",
             },
           },
           "gatsby-tinacms-remark",
