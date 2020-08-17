@@ -81,7 +81,7 @@
     "prettier": "^2.0.4"
   },
   "keywords": [
-    "gatsby"
+    "wikiexplain"
   ],
   "license": "MIT",
   "scripts": {
