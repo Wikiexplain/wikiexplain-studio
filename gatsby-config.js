@@ -33,7 +33,7 @@ module.exports = {
               gitRemote:
                 "git@github.com:Wikiexplain/wikiexplain-studio.git",
               defaultCommitMessage: "Edited with Cloud Editor",
-              defaultCommitName: "Cloud Edit Post",
+              defaultCommitName: "Cloud Editing Post",
               defaultCommitEmail: "wikiexplainllc@gmail.com",
             },
           },
